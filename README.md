@@ -1,6 +1,6 @@
 # Blog-verse
 live at :https://blog-verse-vj3v.onrender.com/
-Blog Verse is a blogging platform that allows users to create, read, update, and delete posts. It includes authentication and media upload functionalities to offer a full-featured user experience.
+'''Blog Verse is a blogging platform that allows users to create, read, update, and delete posts. It includes authentication and media upload functionalities to offer a full-featured user experience.
 
 Table of Contents
 Installation
@@ -59,6 +59,6 @@ Accessing the App: Visit http://localhost:5000 to view the app locally.
 Environment Variables: Configure all necessary environment variables as outlined above.
 License
 This project is licensed under the ISC License - see the LICENSE file for details.
-
+'''
 Author
 Developed by Rishabh Singh.
