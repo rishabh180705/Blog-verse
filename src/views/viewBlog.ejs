@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog View</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base styling */
+        /* Base styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    color: #333;
+}
+
+/* Navbar styling */
+.navbar {
+    background: #333;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+    width: 100%;
+}
+
+.navbar a {
+    color: #f2f2f2;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar .dropdown {
+    float: left;
+    overflow: hidden;
+}
+
+.navbar .dropdown .dropbtn {
+    cursor: pointer;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    color: #f2f2f2;
+    padding: 14px 20px;
+    background-color: inherit;
+}
+
+.navbar .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.navbar .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.navbar .dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.navbar .dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.navbar .user-info {
+    float: right;
+    padding-right: 20px;
+}
+
+/* Full-width blog container */
+.container {
+    max-width: 100%;
+    padding: 20px 60px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 0;
+}
+
+/* Blog title */
+.blog-title {
+    font-size: 2.5em;
+    text-align: center;
+    color: #444;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 10px 0;
+}
+
+/* Author info */
+.author-info {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    font-size: 1.1em;
+}
+
+/* Image */
+.blog-image-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.blog-image {
+    width: 100%;
+    max-height: 450px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-image:hover {
+    transform: scale(1.03);
+}
+
+/* Content */
+.blog-content {
+    font-size: 1.1em;
+    color: #555;
+    line-height: 1.8;
+    margin: 20px auto;
+    padding: 0 20px;
+    max-width: 900px;
+}
+
+/* Like Button */
+.like-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1em;
+    background: #4CAF50;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 20px auto;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.like-btn i {
+    margin-right: 8px;
+}
+
+.like-btn:hover {
+    background-color: #3d8f41;
+}
+
+.like-btn.liked {
+    background-color: red; /* Color for liked state */
+}
+
+/* Comment Section */
+.comment-section {
+    border-top: 2px solid #ddd;
+    padding-top: 20px;
+    margin-top: 40px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-section h3 {
+    font-size: 1.8em;
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.comment-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    font-size: 1em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.comment-btn {
+    font-size: 1.1em;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.comment-btn:hover {
+    background-color: #555;
+}
+
+.comment {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-top: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+    font-size: 1.1em;
+}
+
+/* Back Button */
+.back-btn {
+    display: block;
+    font-size: 1.1em;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    text-align: center;
+    text-decoration: none;
+    width: fit-content;
+    margin: 30px auto;
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #555;
+}
+
+/* Keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px; /* Less padding on smaller screens */
+    }
+
+    .blog-title {
+        font-size: 2em; /* Smaller title on mobile */
+    }
+
+    .comment-input {
+        font-size: 0.9em; /* Smaller font size */
+    }
+
+    .like-btn, .comment-btn, .back-btn {
+        font-size: 0.9em; /* Smaller button size */
+        padding: 8px 16px; /* Adjust padding */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <a href="#">Blog Verse</a>
+    <a href="/">Home</a>
+    <div class="user-info">
+        <% if (user) { %>
+            <div class="dropdown">
+                <button class="dropbtn">Create 
+                    <span>&#9662;</span>
+                </button>
+                <div class="dropdown-content">
+                    <a href="/blog/add-new">Blog Post</a>
+                </div>
+            </div>
+            <a href="/user/myBlogs/<%= user._id %>">My Blogs</a>
+            <a href="#">Welcome, <%= user.email %>!</a>
+            <a href="/user/logout">Logout</a>
+        <% } else { %>
+            <a href="/user/signup">Create Account</a>
+            <a href="/user/signin">Login</a>
+        <% } %>
+    </div>
+</div>
+
+<!-- Blog View Container -->
+<div class="container">
+    <h1 class="blog-title"><%= blog.title %></h1>
+    <div class="author-info">
+        <strong>Author:</strong> <%= blog.author.username %> || <%= blog.author.email %> 
+        <strong>Date:</strong> <%= new Date(blog.createdAt).toLocaleDateString() %>
+    </div>
+
+    <div class="blog-image-container">
+        <img src="<%= blog.coverImage %>" alt="Blog Cover Image" class="blog-image">
+    </div>
+
+    <div class="blog-content">
+        <%= blog.content %>  
+    </div>
+
+    <button class="like-btn">
+        <i class="fas fa-thumbs-up"></i> <%= blog.likes %>
+    </button>
+    
+    <!-- Comment Section -->
+    <div class="comment-section">
+        <h3>Comments</h3> (<%= blog.comments.length %>)
+        <div id="comments-list">
+            <% blog.comments.forEach(comment => { %>
+                <div class="comment">
+                    <strong><%= comment.username %>:</strong> <%= comment.content %>
+                </div>
+            <% }) %>
+        </div>
+        
+        <% if (user) { %>
+            <textarea class="comment-input" rows="4" placeholder="Add your comment..."></textarea>
+            <button class="comment-btn">Submit Comment</button>
+        <% } %>
+    </div> 
+
+    <a href="/" class="back-btn">Back to Blogs</a>
+</div>
+ <% if (user) { %>
+  
+  
+<script>
+    
+document.addEventListener('DOMContentLoaded', () => {
+    const blogId = '<%= blog._id %>'; // Replace with the blog's unique identifier
+    let liked = false;
+     // Like button event listener
+    document.querySelector('.like-btn').addEventListener('click', () => {
+        liked = !liked; // Toggle like status
+        fetch(`/blog/like/${blogId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ liked, username: '<%= user.username %>' }) // Sending JSON with the current state
+        })
+        .then(response => response.json())
+        .then(data => {
+            const likeBtn = document.querySelector('.like-btn');
+            likeBtn.classList.toggle('liked', liked); // Toggle class to change appearance
+            likeBtn.innerHTML = `<i class="fas fa-thumbs-up"></i> ${data.likes} Likes`;
+        })
+        .catch(err => console.error('Error liking:', err));
+    });
+
+    // Comment submission
+  
+    document.querySelector('.comment-btn').addEventListener('click', () => {
+        const content = document.querySelector('.comment-input').value;
+        if (!content) return alert('Comment cannot be empty');
+
+        fetch(`/blog/comment/${blogId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: '<%= user.email %>', content }) // Using actual username
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network response was not ok');
+            return response.json();
+        })
+        .then(data => {
+            displayComments(data.comments);
+            document.querySelector('.comment-input').value = ''; // Clear input after submission
+        })
+        .catch(err => {
+            console.error('Error adding comment:', err);
+            alert('There was an error submitting your comment. Please try again.');
+        });
+    });
+   
+    function displayComments(comments) {
+        const commentsList = document.getElementById('comments-list');
+        commentsList.innerHTML = comments.map(comment => 
+            `<div class="comment">
+                <strong>${comment.username}:</strong> ${comment.content}
+            </div>`
+        ).join('');
+    }
+});
+</script>
+<% } %> 
+</body>
+</html>
